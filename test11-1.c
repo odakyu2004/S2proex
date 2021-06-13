@@ -4,7 +4,7 @@ int main(){
     FILE *idavefile;
     int todofuken;
     float ido,kion;
-    idavefile=fopen("idave.csv","w");
+    idavefile=fopen("idave.prn","w");
 
     fprintf(idavefile,"都道府県番号,緯度,平均気温\n");
 
