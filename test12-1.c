@@ -1,21 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void){
     FILE *idavefile;
     int todofuken;
     float ido,kion,kionsa,heikin;
-    idavefile=fopen("idave2.csv","r");
+    idavefile=fopen("idave.prn","r");
     heikin=0;
-    fscanf(idavefile,"%2d,%f,%f",&todofuken,&ido,&kion);
 
-    fprintf(idavefile,"県番号,緯度,平均気温\n");
+    printf(" ** 全国の気温と緯度 ** \n"); 
+    printf(" 県番号 緯度 経度 気温差 \n"); 
 
-    while(fscanf(idavefile,"%2d %4f %4f",&todofuken,&ido,&kion)!=EOF){
-        kionsa=heikin-kion;
+
+    while(fscanf(idavefile,"%2d %f %f",&todofuken,&ido,&kion)!=EOF){
+        printf(" %2d %2.3f %2.2f \n",todofuken,ido,kion); 
     }
 
-    
+    printf("----------------------------------\n");
+    printf("              全国の平均気温 %2.3f",heikin);
+
+    fclose(idavefile);
 
     return 0;
 }
