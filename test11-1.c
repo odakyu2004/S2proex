@@ -4,9 +4,7 @@ int main(){
     FILE *idavefile;
     int todofuken;
     float ido,kion;
-    idavefile=fopen("idave.csv","w");
-
-    fprintf(idavefile,"都道府県番号,緯度,平均気温\n");
+    idavefile=fopen("idave.prn","w");
 
     for(;;){
         printf("都道府県番号を入力してください");
@@ -16,7 +14,7 @@ int main(){
         }else if(todofuken!=0){
             printf("緯度,平均気温を入力してください");
             scanf("%f %f",&ido,&kion);
-            fprintf(idavefile,"%2d,%2.3f,%2.2f\n",todofuken,ido,kion);
+            fprintf(idavefile,"%2d %2.3f %2.2f\n",todofuken,ido,kion);
         }
     }
 

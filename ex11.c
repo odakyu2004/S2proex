@@ -3,7 +3,7 @@
 int main(void){
 FILE *zaikofile;
 int bango, tanka, suryo; 
-zaikofile=fopen("zaiko.dat", "w");
+zaikofile=fopen("zaiko.prn", "w");
 
 for( ; ; ) {
 printf(" 商品番号を入力: ");

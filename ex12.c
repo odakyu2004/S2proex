@@ -3,7 +3,7 @@
 int main(void){
     FILE *zaikofile;
     int bango, tanka, suryo, kingaku, goukei; 
-    zaikofile=fopen("zaiko.dat", "r");
+    zaikofile=fopen("zaiko.prn", "r");
     goukei=0;
     
     printf(" ** 在庫一覧表 ** \n"); 

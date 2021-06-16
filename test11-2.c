@@ -6,9 +6,7 @@ int main(void){
     int todofukennum;
     char todofukenname[20];
     float ido,kion;
-    idavefile2=fopen("idave2.csv","w");
-
-    fprintf(idavefile2,"都道府県番号,都道府県名,緯度,平均気温\n");
+    idavefile2=fopen("idave2.prn","w");
 
     for(;;){
         printf("都道府県番号を入力してください");
@@ -22,5 +20,7 @@ int main(void){
         }
     }
 
+    fclose(idavefile2);
+    return 0;
 
 }
