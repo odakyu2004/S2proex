@@ -1,31 +1,33 @@
 #include <stdio.h>
+#define N 10
 
 int main(){
-    int i,j;
-    const int n=10;  
-	int num[n];
-    printf("整数値を10個入力してください。\n");
-    for(i=0;i<=9;i++){
-        printf("%dつ目の数値 ",i+1);
-        scanf("%d",&num[i]);
-    }
-    
-    for(i=0;i<n-1;i++){
-        for(j=n-1;j>i;j--){
-            if(num[j-1]<num[j]){
-                int d=num[j-1];
-                num[j-1]=num[j];
-                num[j]=d;
-            }
-        }
-    }
+  int i,j,d;
+  int array[N];
+  
+  printf("整数値を10個入力してください\n");
+  
+  for(i=0;i<N;i++){
+    printf("%d個目の数値 ",i+1);
+    scanf("%d",&array[i]);    
+  }
 
-    printf("大きい値順に並び替えると\n");
-
-    for(i=0;i<n;i++){
-    printf("%d\n",num[i]);
+  for(i=0;i<N-1;i++){
+    for(j=i+1;j<N;j++){
+      if(array[i]<array[j]){
+	d=array[i];
+	array[i]=array[j];
+	array[j]=d;
+      }
     }
-    printf("となります。");
+  }
 
-    return 0;
+  printf("降順で並び替えると\n");
+  
+  for(i=0;i<N;i++){
+    printf("%d\n",array[i]);
+  }
+  printf("となります");
+  
+  return 0;
 }
