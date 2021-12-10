@@ -1,14 +1,13 @@
 #include <stdio.h>
 
-int main(void){
-    int in;
-    int *p;
+int main(){
+  int in;
+  int *p;
 
     printf("16進数で数値を入力してください");
     scanf("%x",&in);
     p=&in;
-    printf("%d",*(unsigned int*)p);
+    printf("%f\n",*(float*)p);
     
     return 0;
-
 }
