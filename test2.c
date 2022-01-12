@@ -110,11 +110,8 @@ int randam(void){   //ランダム変数を出力する関数
     srand(seed);
     int i;
     float r;
-    for(i=0;i<10;i++)
-    {
-        r=rand1();
-        printf("%f\n",r);
-    }
+    r=rand1();
+    printf("%f\n",r);
     return r;
 }
 
@@ -207,7 +204,6 @@ int ryuunen(int mas){   //留年イベント関数
     return 0;     
 }
 //int bukatu(int mas,int money);
-//int randam(float r);
 //じゃんけん
 
 int dengen(int mas){   //電源つまずくイベント関数
@@ -290,7 +286,25 @@ void game(int mas,int money){
 
 int sugoroku(){
     int inmas;
-    scanf("%d",&inmas);
+    char a;
+    scanf("%c",&a);
+    if(a==10){
+        float dai=randam();
+        if(dai<0.167){
+        inmas=1;
+        }else if(dai<0.334){
+        inmas=2;
+        }else if(dai<0.501){
+        inmas=3;
+        }else if(dai<0.668){
+        inmas=4;
+        }else if(dai<0.835){
+        inmas=5;
+        }else if(dai<1){
+        inmas=6;
+        }
+    }
+    
 
     return inmas;
 }
@@ -300,7 +314,7 @@ int main(){
     int p2,p2s,p2d;
     int p3,p3s,p3d;
     int p4,p4s,p4d;
-    int mas,money;
+    int mas,money,dai;
     int n;
     int tarn;
     float r;
@@ -323,19 +337,23 @@ int main(){
         tarn=1;
         int m=4*n;
         if(tarn==1+m){
-            p1=sugoroku();
+            dai=sugoroku();
+            p1=p1-dai;
             player1(p1,p1d,&mas,&money);
             game(mas,money);
         }else if(tarn==2+m){
-            p2=sugoroku();
+            dai=sugoroku();
+            p2=p2-dai;
             player2(p2,p2d,&mas,&money);
             game(mas,money);
         }else if(tarn==3+m){
-            p3=sugoroku();
+            dai=sugoroku();
+            p3=p3-dai;
             player3(p3,p3d,&mas,&money);
             game(mas,money);
         }else if(tarn==4+m){
-            p4=sugoroku();
+            dai=sugoroku();
+            p4=p4-dai;
             player4(p4,p4d,&mas,&money);
             game(mas,money);
         }
