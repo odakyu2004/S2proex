@@ -39,8 +39,8 @@ int menu(void){//メニュー画面とはじめからつづきからを選択す
     return in;
 }
 
-void graphic(char p1n[],char p2n[],char p3n[],char p4n[],int p1m,int p2m,int p3m,int p4m,int p1g,int p2g,int p3g,int p4g){//ゲーム画面を表示する関数
-    char comment[256]={"1Pは学生課で1000円を受け取った!!"};
+void graphic(char p1n[],char p2n[],char p3n[],char p4n[],int p1m,int p2m,int p3m,int p4m,int p1g,int p2g,int p3g,int p4g,int player){
+    char comment;
     printf("1P %10sさん %6d円 あと%3dマス|\n",p1n,p1m,p1g);
     printf("2P %10sさん %6d円 あと%3dマス|\n",p2n,p2m,p2g);
     printf("3P %10sさん %6d円 あと%3dマス|\n",p3n,p3m,p3g);
@@ -61,57 +61,67 @@ void graphic(char p1n[],char p2n[],char p3n[],char p4n[],int p1m,int p2m,int p3m
     printf("                                 □ □ □ □ □ □                   □ □ □ □ □ □\n");
     printf("\n\n\n\n\n");
     printf("-----------------------------------------------------------------------------------------\n");
-    printf("  ▷ %s    \n",comment);
+    printf("  ▷ %d %s    \n",player,comment);
     printf("-----------------------------------------------------------------------------------------\n");
 }
 
-int status(){
-    int p1,p2,p3,p4;
-    int mas1,mas2,mas3,mas4;
-    char name1[]="佐藤";
-    char name2[]="石田";
-    char name3[]="山田";
-    char name4[]="斉藤"; 
-    p1=1000;
-    p2=50000;
-    p3=0;
-    p4=10000;
-    mas1=14;
-    mas2=20;
-    mas3=5;
-    mas4=32;
+void name(char *name1,char *name2,char *name3,char *name4){
+    printf("1P,2P,3P,4Pの名前を入力してください。\n\n");
+    printf("1P:");
+    scanf("%s",name1);
+    printf("\n2P:");
+    scanf("%s",name2);
+    printf("\n3P:");
+    scanf("%s",name3);
+    printf("\n4P:");
+    scanf("%s",name4);
     
+}
 
-    graphic(name1,name2,name3,name4,p1,p2,p3,p4,mas1,mas2,mas3,mas4);
+int status(){
+    int p1,p2,p3,p4,nowplayer;
+    int mas1,mas2,mas3,mas4;
+    char p1n[31],p2n[31],p3n[31],p4n[31];
+
+    name(&p1n,&p2n,&p3n,&p4n);
+
+    graphic(p1n,p2n,p3n,p4n,p1,p2,p3,p4,mas1,mas2,mas3,mas4,nowplayer);
 
     return 0;
 }
 
-void player1(int mas,int money,int *masp,int *moneyp){  //各プレーヤーの情報を共通変数に代入
+void player1(int mas,int money,int *masp,int *moneyp,int *player){  //各プレーヤーの情報を共通変数に代入
     *masp=mas;
     *moneyp=money;
+    *player=1;
 }
-void player2(int mas,int money,int *masp,int *moneyp){
+void player2(int mas,int money,int *masp,int *moneyp,int *player){
     *masp=mas;
     *moneyp=money;
+    *player=2;
 }
-void player3(int mas,int money,int *masp,int *moneyp){
+void player3(int mas,int money,int *masp,int *moneyp,int *player){
     *masp=mas;
     *moneyp=money;
+    *player=3;
 }
-void player4(int mas,int money,int *masp,int *moneyp){
+void player4(int mas,int money,int *masp,int *moneyp,int *player){
     *masp=mas;
     *moneyp=money;
+    *player=4;
 }
 
-int randam(void){   //ランダム変数を出力する関数
+float randam(void){   //ランダム変数を出力する関数
     time_t ctm;
     unsigned seed=time(&ctm);
     srand(seed);
     int i;
     float r;
-    r=rand1();
-    printf("%f\n",r);
+
+    for(i=0;i<10;i++){
+        r=rand1();
+        printf("%f\n",r);
+    }
     return r;
 }
 
@@ -314,7 +324,7 @@ int main(){
     int p2,p2s,p2d;
     int p3,p3s,p3d;
     int p4,p4s,p4d;
-    int mas,money,dai;
+    int mas,money,dai,player;
     int n;
     int tarn;
     float r;
@@ -324,48 +334,49 @@ int main(){
     title();
     sleep(second);
     menu();
-    status();
+    
     p1=MAS; //マス数初期化
     p2=MAS;
     p3=MAS;
     p4=MAS;
-   
+    n=0;
+    tarn=1;
 
     money=1000;
     for(;;){
-        n=0;
-        tarn=1;
+    
         int m=4*n;
         if(tarn==1+m){
             dai=sugoroku();
             p1=p1-dai;
-            player1(p1,p1d,&mas,&money);
+            player1(p1,p1d,&mas,&money,&player);
             game(mas,money);
         }else if(tarn==2+m){
             dai=sugoroku();
             p2=p2-dai;
-            player2(p2,p2d,&mas,&money);
+            player2(p2,p2d,&mas,&money,&player);
             game(mas,money);
         }else if(tarn==3+m){
             dai=sugoroku();
             p3=p3-dai;
-            player3(p3,p3d,&mas,&money);
+            player3(p3,p3d,&mas,&money,&player);
             game(mas,money);
         }else if(tarn==4+m){
             dai=sugoroku();
             p4=p4-dai;
-            player4(p4,p4d,&mas,&money);
+            player4(p4,p4d,&mas,&money,&player);
             game(mas,money);
         }
-        if(mas==0){
+        if(mas<=0){
             break;
         }
-        printf("%d %d\n",mas,money);
+        printf("%d %d %d\n",player,mas,money);
         printf("%d %d\n",m,tarn);
-        tarn++;
+        
         if(tarn%4==0){
             n++;
         }
+        tarn++;
     }
         
     return 0;
