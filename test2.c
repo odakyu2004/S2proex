@@ -120,7 +120,6 @@ float randam(void){   //ランダム変数を出力する関数
 
     for(i=0;i<10;i++){
         r=rand1();
-        printf("%f\n",r);
     }
     return r;
 }
@@ -371,7 +370,6 @@ int main(){
             break;
         }
         printf("%d %d %d\n",player,mas,money);
-        printf("%d %d\n",m,tarn);
         
         if(tarn%4==0){
             n++;
