@@ -1,49 +1,19 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <math.h>
 
 int main(void){
-    FILE *idavefile;
-    char todofukenmei[15];
-    char name[10];
-    char conma[2];
-    char row[50];
-    int todofuken,i;
-    float ido,kion,kionsa,heikin,sum;
-    float idoA[47],kionA[47],kionsaA[47];
-    
-    printf("ファイル名を入力してください ");
-    scanf("%s",name);
-    
-    if((idavefile=fopen(name,"r"))==NULL){
-      printf("Can not open file.\n");
-      exit(-1);
-    }
+    float θ,m,v0,g,pi,x,h,rad;
+    g = 9.8;
+    pi =3.14;
+    m= 10;
    
-    printf(" ** 全国の気温と緯度 ** \n"); 
-    printf(" 都道府県名  緯度    気温  気温差 \n"); 
 
-    while(fscanf(idavefile,"%d %s %f %f",&todofuken,todofukenmei,&ido,&kion)!=EOF) {
-	idoA[i]=ido;
-	kionA[i]=kion;
-	sum=sum+kionA[i];
-	i++;
-    }
-    heikin=sum/47;//平均気温を求める
-    i=0;
-    rewind(idavefile);
-    while(fscanf(idavefile,"%d %s %f %f",&todofuken,todofukenmei,&ido,&kion)!=EOF){
-      kionsaA[i]=(kionA[i])-heikin;
-      printf("   %s   %2.3f   %2.1f   %+2.2f \n",todofukenmei,idoA[i],kionA[i],kionsaA[i]);
-      i++;
-    }
- 
-    printf("-------------------------------\n");
-    printf("         全国の平均気温 %5.3f\n",heikin);
- 
+    printf("角度θと初速度V0を入力してください: ");
+    scanf("%f %f",&θ,&v0);
 
-    fclose(idavefile);
+    rad = ((pi)/180)*θ;
 
-    return 0;
+    h = ((v0*v0)*(sin(rad)*sin(rad)))/(2*g);
+    x = (2*(v0*v0)*sin(rad)*cos(rad))/g;
+    printf("最高点の高さは %8.4f(m)です. 飛距離は %8.4f(m)です.",h,x);    
 }
-
